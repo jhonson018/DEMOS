@@ -1,4 +1,4 @@
-package model;
+package com.example.demo2.model;
 
 import lombok.Builder;
 import lombok.Data;

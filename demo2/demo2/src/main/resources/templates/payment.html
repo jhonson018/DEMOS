@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pagos de Profesores</title>
+    <script>
+        function calcularARS() {
+            var rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                var sueldo = parseFloat(row.querySelector('.sueldo').innerText);
+                var ars = sueldo * 0.0304; // 3.04% para ARS
+                row.querySelector('.ars').innerText = ars.toFixed(2);
+            });
+        }
+
+        function calcularAFP() {
+            var rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                var sueldo = parseFloat(row.querySelector('.sueldo').innerText);
+                var afp = sueldo * 0.0287; // 2.87% para AFP
+                row.querySelector('.afp').innerText = afp.toFixed(2);
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>Lista de Pagos de Profesores</h1>
+<button onclick="calcularARS()">Calcular ARS</button>
+<button onclick="calcularAFP()">Calcular AFP</button>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID Empleado</th>
+        <th>Cédula</th>
+        <th>Cuenta Banco</th>
+        <th>Fecha de Pago</th>
+        <th>Nombre Completo</th>
+        <th>Procedencia</th>
+        <th>Sueldo</th>
+        <th>ARS</th>
+        <th>AFP</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pago : ${pagos}">
+        <td th:text="${pago.idEmpleado}"></td>
+        <td th:text="${pago.cedula}"></td>
+        <td th:text="${pago.cuentaBanco}"></td>
+        <td th:text="${pago.fechaDePago}"></td>
+        <td th:text="${pago.nombreCompleto}"></td>
+        <td th:text="${pago.procedencia}"></td>
+        <td class="sueldo" th:text="${pago.sueldo}"></td>
+        <td class="ars">0.00</td>
+        <td class="afp">0.00</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
